@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Sudoku Game</title>
+  <link rel="stylesheet" href="Style.css">
+   <script
+      type="text/javascript"
+      src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"
+    ></script>
+</head>
+
+  <body>
+    <h1 style="font-size:70px ; font-family:'Courier New'"> SMART SUDOKU SOLVER </h1>
+  <div class = "ex3">
+	<br>
+	<h3>
+	missing value  is : 
+	<div id = resultColumn style ="background-color:yellow ;font-size:xx-large;">
+		
+		</div>
+	</h3>
+	<h3> <br>
+	At column number  : 
+	<div id = resultC  style ="background-color:yellow ;font-size:xx-large;">
+		
+		</div>
+	</h3>
+	
+		<h3><br> <br>
+	missing value  is : 
+	<div id = resultRow style ="background-color:yellow ;font-size:xx-large;">
+		
+		</div>
+	</h3>
+	<h3> <br>
+	At row number  : 
+	<div id = resultR style ="background-color:yellow ;font-size:xx-large;">
+		
+		</div>
+	</h3><br> <br>
+	<h3>
+	Missing value is :
+	<div id = resultSector style ="background-color:yellow ;font-size:xx-large;"> </div>
+	</h3>
+	
+	<h3> <br>
+	At Sector numer :
+	<div id = resultS style ="background-color:yellow ;font-size:xx-large;"> </div>
+	</h3><br> <br>
+	
+	<div id = alert1 style ="background-color:yellow"></div><br>
+	<div id = alert2 style ="background-color:yellow"></div><br>
+	<div id = alert3 style ="background-color:yellow"></div><br><br>
+	
+	
+	</div>
+    <!-- including the jquery library link -->
+   
+    <div id="num">
+      <label for="cars">Choose a number:</label>
+      <select id="sudonum">
+		<option value="10" id="10">Select Number</option>
+        <option value="1" id="1">1</option>
+        <option value="2" id="2">2</option>
+        <option value="3" id="3">3</option>
+        <option value="4" id="4">4</option>
+        <option value="5" id="5">5</option>
+        <option value="6" id="6">6</option>
+        <option value="7" id="7">7</option>
+        <option value="8" id="8">8</option>
+        <option value="9" id="9">9</option>
+      </select>
+      <button type="button" id="steprun" data-action="NewGame">STEP RUN</button>
+	  <button type="button" id="clear" data-action="NewGame">clear hint</button>
+	  <button type="button" id="manual">Empty Grid/Manual</button>
+      <button type="button" id="freeze">Freeze</button>
+      <button type="button" id="clear1">Clear board </button>
+      </div>
+    </div> <br>
+    <div id="container"></div><br>
+
+	
+    <div class = "ex2">
+		<br>
+
+     LEGENDS : 
+	<ul>
+    <li><span class="bluebox"></span> - Indicates the original sudoku values </li> <br><br>	
+    <li><span class="greenbox"></span> - Valid Position to place the number selected from the drop down menu OR place the number displayed in the box above the sudoku (Depends on which hint the user have selected :STEP RUN or drop down menu)</li> <br> <br> <br> <br>
+    <li><span class="purplebox"></span> - Indiates Single empty cell present in the column </li> <br>	<br>	
+	<li><span class="orangebox"></span> - Indicates Single empty cell present in the row  </li> <br><br>	
+	<li><span class="yellowbox"></span> - Number Cannot be entered in the filled boxes.Marks the entire rows and columns of the selected digit from the drop down menu </li> <br><br><br>
+	<li><span class="pinkbox"></span> - Indicates Single empty cell present in the Sector </li> <br><br>	
+	</ul>
+	
+	
+    
+    </div>
+	
+	
+
+    <!-- jQuery and javascript both concepts are used  -->
+    <script src="Script.js">
+    </script>
+
+  </body>
+</html>
