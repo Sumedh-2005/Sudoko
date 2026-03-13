@@ -1,5 +1,6 @@
 var empty_arr;
     // .ready function executes whenever the html page is ready
+
       $(document).ready(function() {
 	  empty_arr = 0;
         var game = Sudoku.getInstance();
