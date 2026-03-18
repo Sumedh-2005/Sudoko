@@ -1,261 +1,278 @@
-# 🧠 Smart Sudoku Solver
+# 🧩 Smart Sudoku Solver
 
-**Smart Sudoku Solver** is a web-based Sudoku game and learning tool that demonstrates how Sudoku puzzles can be solved using **human logical techniques instead of brute-force algorithms**.
+> A browser-based interactive Sudoku game that solves puzzles using **human logical techniques** — not brute-force algorithms. Designed to help users **learn and understand Sudoku strategies** through color-coded, step-by-step visual hints.
 
-The project implements **13 paper-and-pencil solving logics** and visually demonstrates them using **color-coded hints**, helping users **learn Sudoku strategies step-by-step while solving puzzles**.
-
-This solver currently supports **Easy and Medium level Sudoku puzzles** and provides interactive guidance for users through logical hints.
-
-
-
-# 🎯 Project Goals
-
-* Provide a **logic-based Sudoku solving experience**
-* Help users **learn Sudoku strategies visually**
-* Implement **step-by-step hints based on logical deduction**
-* Create an interactive **Sudoku learning tool**
+![HTML5](https://img.shields.io/badge/HTML5-E34F26?style=for-the-badge&logo=html5&logoColor=white)
+![CSS3](https://img.shields.io/badge/CSS3-1572B6?style=for-the-badge&logo=css3&logoColor=white)
+![JavaScript](https://img.shields.io/badge/JavaScript-F7DF1E?style=for-the-badge&logo=javascript&logoColor=black)
 
 ---
 
-# ✨ Features
+## 📌 Table of Contents
 
-✔ Interactive **9×9 Sudoku Grid**
-✔ **Step-by-step logical hints**
-✔ **Color-coded visualization** of solving techniques
-✔ Ability to **enter custom Sudoku puzzles**
-✔ **Freeze user inputs** to prevent accidental changes
-✔ **Clear hints and reset puzzle options**
-✔ Supports **Easy and Medium difficulty Sudoku**
-
----
-
-# 🧠 Sudoku Solving Logics Implemented
-
-The solver is based on **13 logical techniques used in manual Sudoku solving**.
-
----
-
-## Logic 1 – Start with High Frequency Number
-
-Begin solving the puzzle with the digit that appears most frequently in the grid.
+- [About the Project](#-about-the-project)
+- [Features](#-features)
+- [Solving Logics](#-sudoku-solving-logics-implemented)
+- [Color Legend](#-color-legend)
+- [Controls](#-application-controls)
+- [How to Run](#-how-to-run-the-project)
+- [Project Structure](#-project-structure)
+- [Technology Stack](#-technology-stack)
+- [Screenshots](#-screenshots)
+- [Project Status](#-project-status)
+- [Future Improvements](#-future-improvements)
+- [Development Methodology](#-development-methodology)
+- [Author](#-author)
 
 ---
 
-## Logic 2 – Single Cell in Sector
+## 📖 About the Project
 
-If a **3×3 sector** has only one possible position for a number, that cell is selected using row and column elimination.
+**Smart Sudoku Solver** is a web-based Sudoku game and learning tool that implements **13 paper-and-pencil solving logics** to guide users through solving Sudoku puzzles visually.
 
----
-
-## Logic 3 – Single Possible Cell in Column
-
-If only one non-highlighted cell remains in a column after applying elimination logic, the number is placed in that cell.
+Instead of automatically solving the puzzle, the solver **teaches users how to think** — highlighting valid placements, eliminating impossible positions, and pinpointing cells where only one number can go. It currently supports **Easy and Medium level** Sudoku puzzles.
 
 ---
 
-## Logic 4 – Single Possible Cell in Row
+## ✨ Features
 
-If only one non-highlighted cell remains in a row, the number is placed in that position.
-
----
-
-## Logic 5 – Sector Elimination
-
-When a digit is selected:
-
-* The **entire sector containing that digit** is marked in **yellow**
-* That sector is eliminated as a possible placement location.
+- ✅ Interactive **9×9 Sudoku Grid**
+- ✅ **13 logic-based step-by-step hints**
+- ✅ **Color-coded visualization** of each solving technique
+- ✅ **Custom puzzle input** via Empty Grid / Manual mode
+- ✅ **Real-time input validation** (highlights errors instantly)
+- ✅ **Freeze cells** to lock in confirmed digits
+- ✅ **Clear hints and reset** options
+- ✅ Supports **Easy and Medium difficulty** puzzles
 
 ---
 
-## Logic 6 – Row Elimination
+## 🧠 Sudoku Solving Logics Implemented
 
-When a digit is selected:
+The solver is built around **13 logical techniques** used in manual Sudoku solving:
 
-* The **entire row containing that digit** is highlighted
-* That row is discarded for further placements of that digit.
-
----
-
-## Logic 7 – Column Elimination
-
-When a digit is selected:
-
-* The **entire column containing that digit** is highlighted
-* That column is eliminated.
-
----
-
-## Logic 8 – Row and Column Intersection
-
-After eliminating possible cells using row and column rules, the **remaining single cell in a sector must contain the selected digit**.
+| # | Logic | Description |
+|---|-------|-------------|
+| 1 | **High Frequency Number** | Start with the digit that appears most often in the grid |
+| 2 | **Single Cell in Sector** | If a 3×3 sector has only one valid position for a digit, place it there |
+| 3 | **Single Possible Cell in Column** | Only one non-eliminated cell remains in a column |
+| 4 | **Single Possible Cell in Row** | Only one non-eliminated cell remains in a row |
+| 5 | **Sector Elimination** | Highlight and eliminate the sector that already contains the digit |
+| 6 | **Row Elimination** | Highlight and eliminate the entire row containing the digit |
+| 7 | **Column Elimination** | Highlight and eliminate the entire column containing the digit |
+| 8 | **Row & Column Intersection** | After elimination, the remaining single cell in a sector must hold the digit |
+| 9 | **Missing Number in Row** | One empty cell in a row → Missing = `45 − (sum of other digits)` |
+| 10 | **Missing Number in Column** | One empty cell in a column → Missing = `45 − (sum of other digits)` |
+| 11 | **Missing Number in Sector** | One empty cell in a sector → Missing = `45 − (sum of other digits)` |
+| 12 | **Three Remaining Numbers** | When 3 numbers remain in a row/column, use restrictions to assign them |
+| 13 | **Candidate Reduction** | Three empty cells with two candidates → third cell gets the remaining number |
 
 ---
 
-## Logic 9 – Missing Number in Row
+## 🎨 Color Legend
 
-If a row has **only one empty cell**, the missing number is calculated as:
+| Color | Meaning |
+|-------|---------|
+| 🔵 **Light Blue** | Original pre-filled puzzle values |
+| 🟢 **Green** | Valid cell to place the selected number |
+| 🟣 **Purple** | Column with a single empty cell |
+| 🟠 **Orange** | Row with a single empty cell |
+| 🟡 **Yellow** | Rows/columns already containing the selected digit |
+| 🩷 **Pink** | Sector (3×3 box) with a single empty cell |
+| 🔴 **Red** | Invalid entry — number already exists in row, column, or sector |
+
+---
+
+## 🎮 Application Controls
+
+| Button | Function |
+|--------|----------|
+| **Dropdown Menu** | Select a digit to see all valid positions highlighted on the board |
+| **STEP RUN** | Shows the next logical hint (single empty row, column, or sector) |
+| **CLEAR HINT** | Removes all current color highlights from the board |
+| **EMPTY / MANUAL** | Clears the entire grid for custom puzzle input |
+| **FREEZE** | Locks all currently filled cells to prevent accidental changes |
+| **CLEAR BOARD** | Clears only user-entered digits; original puzzle values remain |
+
+---
+
+## 🚀 How to Run the Project
+
+### Prerequisites
+- A modern web browser (Chrome, Firefox, Edge)
+- [VS Code](https://code.visualstudio.com/) *(optional but recommended)*
+- [Git](https://git-scm.com/downloads) *(only needed to clone the repository)*
+
+---
+
+### ▶️ Method 1 — Direct Browser (Simplest)
+
+1. Download or clone this repository
+2. Open the project folder
+3. **Double-click `index.html`**
+4. The game opens directly in your browser ✅
+
+---
+
+### ▶️ Method 2 — VS Code with Live Server (Recommended)
+
+1. Install [VS Code](https://code.visualstudio.com/)
+2. Open VS Code → Click **Extensions** (`Ctrl + Shift + X`)
+3. Search for **Live Server** by *Ritwick Dey* → Click **Install**
+4. Click **File → Open Folder** → Select your `sudoku` project folder
+5. Open `index.html` in the editor
+6. Right-click inside the file → Click **"Open with Live Server"**
+7. Browser opens automatically at `http://127.0.0.1:5500/index.html` ✅
+
+---
+
+### ▶️ Method 3 — Clone from GitHub
+
+Open your terminal or command prompt and run:
+
+```bash
+git clone https://github.com/YourName/smart-sudoku-solver.git
+cd smart-sudoku-solver
+```
+
+Then open `index.html` in your browser or use Live Server as shown in Method 2.
+
+---
+
+### ⚠️ Important — Required Files
+
+Make sure **all these files are in the same folder** before running:
+
+| File | Description |
+|------|-------------|
+| `index.html` | Main file — open this to launch the game |
+| `style.css` | All styles and color themes |
+| `sudoku.js` | Game logic, hints, and validation |
+| `joanna-kosinska-...jpg` | Background image |
+
+> If the background image is missing, the game still works but the background will be blank.
+
+---
+
+### ▶️ How to Play
+
+1. The Sudoku board loads automatically with a puzzle
+2. Click any **empty white cell** and type a number (1–9)
+   - 🔴 **Red** = invalid (number already exists in that row, column, or sector)
+   - ✅ **No highlight** = valid entry
+3. Use the **hint tools** for guidance:
+   - **Dropdown** → Select a number to see all valid positions on the board
+   - **STEP RUN** → Highlights the row, column, or sector with one missing value
+   - **CLEAR HINT** → Removes all highlights
+4. Use **EMPTY / MANUAL** to enter your own custom puzzle
+5. Use **FREEZE** to lock filled cells
+6. Use **CLEAR BOARD** to reset your entered values
+
+---
+
+## 📁 Project Structure
 
 ```
-Missing Number = 45 - (Sum of other digits in the row)
+smart-sudoku-solver/
+│
+├── index.html                          # Main HTML structure
+├── style.css                           # All CSS styles and color themes
+├── sudoku.js                           # Game logic, hint system, validation
+├── joanna-kosinska-...jpg              # Background image
+└── README.md                           # Project documentation
 ```
 
-The row is highlighted in **light blue**.
+---
+
+## 🛠 Technology Stack
+
+| Technology | Purpose |
+|------------|---------|
+| **HTML5** | Structure and layout of the web application |
+| **CSS3** | Styling, grid design, and color-coded highlights |
+| **JavaScript (ES5)** | Sudoku solving logic, hints, and validation |
+| **jQuery 2.1.3** | DOM manipulation and event handling |
+| **Microsoft Excel** | Prototype development and logic testing |
+| **VBA & Macros** | Initial logic validation before web implementation |
 
 ---
 
-## Logic 10 – Missing Number in Column
+## 📷 Screenshots
 
-If a column has **one empty cell**, the missing number is:
+**1. Dropdown Hint — Green cells show valid positions for the selected digit**
 
-```
-Missing Number = 45 - (Sum of other digits in the column)
-```
-
-The column is highlighted in **purple**.
+<img width="940" height="529" alt="Dropdown Hint" src="https://github.com/user-attachments/assets/bea94ce1-af9a-4622-bcb3-e7f610442859" />
 
 ---
 
-## Logic 11 – Missing Number in Sector
+**2. Step Run — Pink highlight shows a sector with a single empty cell**
 
-If a **3×3 sector has one empty cell**, the missing number is:
-
-```
-Missing Number = 45 - (Sum of other digits in the sector)
-```
-
-The sector is highlighted with **light skin color**.
+<img width="940" height="529" alt="Sector Hint" src="https://github.com/user-attachments/assets/8f0f5e0d-0ac6-4149-aac9-8bed5136620f" />
 
 ---
 
-## Logic 12 – Three Remaining Numbers Logic
+**3. Step Run — Purple highlight shows a column with a single empty cell**
 
-When only **three numbers remain in a row or column**:
-
-1. Two cells may contain two of the numbers.
-2. By checking row and column restrictions, candidate numbers are identified.
-3. The remaining number goes into the final cell.
+<img width="940" height="529" alt="Column Hint" src="https://github.com/user-attachments/assets/d21ed11b-0635-4d2f-b01f-701ba46df99a" />
 
 ---
 
-## Logic 13 – Candidate Reduction Logic
+## 📊 Project Status
 
-When **three cells are empty** in a row or column:
+| Feature | Status |
+|---------|--------|
+| Logic solver (13 techniques) | ✅ Complete |
+| Interactive Sudoku interface | ✅ Complete |
+| Visual hint system | ✅ Complete |
+| Real-time validation | ✅ Complete |
+| Hard difficulty support | ⏳ Planned |
+| Automatic full solver | ⏳ Planned |
+| Score & leaderboard system | ⏳ Planned |
 
-* Two cells will contain two possible candidates.
-* The third cell will contain the **remaining unused number**.
-
----
-
-# 🎮 Application Controls
-
-| Button             | Function                                                  |
-| ------------------ | --------------------------------------------------------- |
-| **STEP RUN**       | Displays the next logical hint                            |
-| **CLEAR HINT**     | Removes highlighted hint                                  |
-| **EMPTY / MANUAL** | Clears the grid for custom puzzle input                   |
-| **FREEZE**         | Locks user-entered digits                                 |
-| **CLEAR**          | Clears user-entered digits while keeping original numbers |
+### ⚠️ Current Limitations
+- Supports **Easy and Medium** puzzles only
+- No undo/redo functionality yet
+- No timer or scoring system yet
 
 ---
 
-# 🏗 Development Methodology
+## 🔮 Future Improvements
 
-The project was developed using a **combination of Waterfall and Agile approaches**.
-
-### Phase 1 – Paper-Based Logic Analysis
-
-Sudoku solving strategies were **tested manually using paper and pencil**.
-
-### Phase 2 – Prototype Development
-
-A working prototype was built using **Microsoft Excel** with:
-
-* VBA Macros
-* Conditional Formatting
-* Logical Functions (`IF`, `ISBLANK`, `COUNTBLANK`)
-
-### Phase 3 – Web Implementation
-
-The final solver was implemented as a **web application** using modern web technologies.
+- ⏱ **Score system** based on time taken to solve
+- 🏆 **Leaderboard** for top players
+- ↩ **Undo / Redo** feature
+- ✏ **Erase tool** for individual cells
+- 🧠 **Complete automatic Sudoku solver**
+- 💾 **Database integration** to store scores
+- 🔥 **Hard difficulty** puzzle support
+- 📱 **Mobile responsive** layout
 
 ---
 
-# 🛠 Technology Stack
+## 🏗 Development Methodology
 
-| Technology      | Purpose                          |
-| --------------- | -------------------------------- |
-| HTML            | Structure of the web application |
-| CSS             | Styling and grid layout          |
-| JavaScript      | Sudoku solving logic             |
-| XSLT            | Data processing                  |
-| Microsoft Excel | Prototype development            |
-| VBA & Macros    | Logic testing                    |
-| Microsoft Word  | Documentation                    |
+The project was developed using a **combination of Waterfall and Agile approaches** across three phases:
 
----
+**Phase 1 — Paper-Based Logic Analysis**
+Sudoku solving strategies were tested manually using paper and pencil to understand each logical technique before coding.
 
-# 📊 Project Status
+**Phase 2 — Prototype Development**
+A working prototype was built in **Microsoft Excel** using VBA Macros, Conditional Formatting, and logical functions (`IF`, `ISBLANK`, `COUNTBLANK`) to validate each logic.
 
-✅ Logic solver implemented
-✅ Interactive Sudoku interface
-✅ Hint system with visual logic representation
-
-⚠ Current limitations:
-
-* Only **Easy and Medium Sudoku puzzles**
-* Execution speed could be optimized
-* Advanced solving strategies not yet implemented
+**Phase 3 — Web Implementation**
+The validated logic was translated into a full web application using HTML, CSS, JavaScript, and jQuery.
 
 ---
 
-# 🚀 Future Improvements
+## 👨‍💻 Author
 
-Planned enhancements include:
+**Sumedh Ajay Talokar**
 
-* ⏱ **Score system based on time**
-* 🏆 **Leaderboard for top players**
-* ↩ **Undo feature**
-* ✏ **Erase tool**
-* 🧠 **Complete automatic Sudoku solver**
-* 💾 **Database to store scores**
-* 🔥 **Support for Hard Sudoku puzzles**
+This project was independently designed and developed, including:
+- Sudoku solving logic design
+- Excel prototype development
+- Full web application implementation
 
 ---
 
-# 📷 Screenshots
-
-
-1. The Below screenshot gives the hint needed for the user while solving the green colour cell represents the eligible cell for the digit selected from the drop down list.
-
-
-<img width="940" height="529" alt="image" src="https://github.com/user-attachments/assets/bea94ce1-af9a-4622-bcb3-e7f610442859" />
-
-
-2. Below screenshots shows hint for the single empty cell in the sector
-
-
-<img width="940" height="529" alt="image" src="https://github.com/user-attachments/assets/8f0f5e0d-0ac6-4149-aac9-8bed5136620f" />
-
-
-3. Below screenshots shows hint for the single empty cell in the column
-
-
-<img width="940" height="529" alt="image" src="https://github.com/user-attachments/assets/d21ed11b-0635-4d2f-b01f-701ba46df99a" />
-
-
----
-
-# 👨‍💻 Author
-
-**Smart Sudoku Solver**
-
-Developed by **[Sumedh Ajay Talokar]**
-
-This project was **independently designed and developed**, including:
-
-* Sudoku solving logic design
-* Prototype development
-* Web application implementation
-
----
+> ⭐ If you found this project useful, consider giving it a star on GitHub!
